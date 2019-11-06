@@ -41,6 +41,7 @@ export default {
     }
   },
   mounted () {
+    // On récupère les données de l'API en fonction des paramètres fournie par l'utilisateur (le nombre de question ainsi que la catégorie choisie)
     axios
       .get(`https://opentdb.com/api.php?amount=${this.$route.params.nbQuestion}&category=${this.$route.params.category}`)
       .then(response => {
@@ -52,6 +53,7 @@ export default {
       })
       .finally(() => { this.isLoading = false })
   },
+  // On mélange l'ordre des réponses afin que la bonne réponse ne soit pas tout le temps en dernière position
   updated () {
     if (!this.showNextButton) {
       for (let i = this.$refs.responseContainer.children.length; i >= 0; i--) {
@@ -60,18 +62,22 @@ export default {
     }
   },
   methods: {
+    // On invalide le résultat si l'utilisateur cliqué sur une mauvaise réponse
     invalidResult () {
       this.result = false
     },
+    // On valide le résultat si l'utilisateur cliqué sur la bonne réponse
     validResult () {
       this.result = true
     },
+    // Gestion du boutton "Valider"
     submitResponse () {
       if (this.result) {
         this.score++
       }
       this.showNextButton = true
     },
+    // Gestion du boutton "Suivant"
     nextQuestion () {
       this.result = false
       this.questionIndex++

@@ -43,6 +43,7 @@ export default {
     }
   },
   mounted () {
+    // On récupère la liste des catégories proposés par l'API
     axios
       .get('https://opentdb.com/api_category.php')
       .then(response => (this.categoryList = response.data.trivia_categories))
