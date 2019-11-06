@@ -3,8 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import Fragment from 'vue-fragment'
 
 Vue.config.productionTip = false
+Vue.use(Fragment.Plugin)
 
 /* eslint-disable no-new */
 new Vue({

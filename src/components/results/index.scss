@@ -1,0 +1,35 @@
+@import "../../scss/colors.scss";
+@import "../../scss/button";
+
+#home {
+  margin: auto;
+}
+
+h1 {
+  text-transform: uppercase;
+  font-size: 4em;
+}
+
+.setup {
+  margin-top: 30px;
+}
+
+label {
+  display: block;
+  margin: 30px auto 10px auto;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+select {
+  border: 15px solid $primary;
+  border-radius: 10px;
+  background-color: $primary;
+  color: $white;
+  box-shadow: 0 5px 0 0 $primaryDark;
+  font-size: 1.3em;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+}

@@ -1,0 +1,68 @@
+@import "../../scss/colors.scss";
+@import "../../scss/button";
+
+h1 {
+  text-transform: uppercase;
+  font-size: 4em;
+}
+
+h2 {
+  font-size: 2em;
+  max-width: 800px;
+  margin: auto;
+}
+
+.response-container {
+  margin-top: 30px;
+}
+
+.response {
+  margin: 10px auto;
+
+  input {
+    visibility: hidden;
+    display: block;
+  }
+
+  input[type="radio"]:checked + label {
+    font-weight: bold;
+    color: $primary;
+  }
+
+  label {
+    font-weight: bold;
+    font-size: 1.3em;
+    cursor: pointer;
+    transition: .1s;
+
+    &:hover {
+      transition: .1s;
+      color: $primary;
+    }
+  }
+}
+
+.feedback {
+  padding: 10px 20px;
+  font-size: 2em;
+  font-weight: bold;
+  line-height: 1;
+  margin-top: 50px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.good-answer {
+  color: $green;
+  border: 3px solid $green;
+}
+
+.bad-answer {
+  color: $primary;
+  border: 3px solid $primary;
+}
+
+.button {
+  display: block;
+  margin: 30px auto;
+}
