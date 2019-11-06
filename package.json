@@ -9,7 +9,7 @@
     "start": "npm run dev",
     "lint": "eslint --ext .js,.vue src",
     "build": "node build/build.js",
-    "deploy": "npm run build && git add -A && git commit -nm ':rocket: deploy' && git push && git-directory-deploy --directory build --branch gh-pages"
+    "deploy": "npm run build && git add -A && git commit -nm ':rocket: deploy' && git push && git subtree push --prefix build origin gh-pages"
   },
   "homepage": "https://guillaume-duclos.github.io/quiz-app/",
   "dependencies": {
