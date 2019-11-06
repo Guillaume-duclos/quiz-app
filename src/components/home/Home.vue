@@ -1,140 +1,50 @@
 <template>
   <div id="home">
     <h1>Quiz</h1>
-    <p>Choisissez une témathique et un niveau de difficulté avant de commencer.</p>
+    <h2>Choisissez une témathique et un niveau de difficulté avant de commencer.</h2>
     <div class="setup">
       <div>
-        <label>Choisissez la catégorie</label>
-        <select>
-          <option v-for="category in categorys" v-bind:key="category.name" v-bind:value="category.id">
+        <label>Choisissez la catégorie :</label>
+        <select v-model="chosenCategory">
+          <option v-for="category in categoryList" v-bind:key="category.name" v-bind:value="category.id">
             {{ category.name }}
           </option>
         </select>
       </div>
       <div>
-        <label>Choisissez le nombre de question</label>
-        <select>
+        <label>Choisissez le nombre de question :</label>
+        <select v-model="questionNumber">
           <option v-for="i in 50" v-bind:key="i" v-bind:value="i">
             {{ i }}
           </option>
         </select>
       </div>
     </div>
-    <Button text="Valider" link="/quiz"></Button>
+    <Link text="Valider" name="Quiz" v-bind:category=chosenCategory v-bind:nbQuestion=questionNumber />
   </div>
 </template>
 
 <script>
-  import Button from '../link/Link.vue'
+import Link from '../link/Link.vue'
+import axios from 'axios'
 
-  export default {
-    data() {
-      return {
-        categorys: [
-          {
-            id: 9,
-            name: 'General Knowledge'
-          },
-          {
-            id: 10,
-            name: 'Entertainment: Books'
-          },
-          {
-            id: 11,
-            name: 'Entertainment: Film'
-          },
-          {
-            id: 12,
-            name: 'Entertainment: Music'
-          },
-          {
-            id: 13,
-            name: 'Entertainment: Musicals & Theatres'
-          },
-          {
-            id: 14,
-            name: 'Entertainment: Television'
-          },
-          {
-            id: 15,
-            name: 'Entertainment: Video Games'
-          },
-          {
-            id: 16,
-            name: 'Entertainment: Board Games'
-          },
-          {
-            id: 17,
-            name: 'Science & Nature'
-          },
-          {
-            id: 18,
-            name: 'Science: Computers'
-          },
-          {
-            id: 19,
-            name: 'Science: Mathematics'
-          },
-          {
-            id: 20,
-            name: 'Mythology'
-          },
-          {
-            id: 21,
-            name: 'Sports'
-          },
-          {
-            id: 22,
-            name: 'Geography'
-          },
-          {
-            id: 23,
-            name: 'History'
-          },
-          {
-            id: 24,
-            name: 'Politics'
-          },
-          {
-            id: 25,
-            name: 'Art'
-          },
-          {
-            id: 26,
-            name: 'Celebrities'
-          },
-          {
-            id: 27,
-            name: 'Animals'
-          },
-          {
-            id: 28,
-            name: 'Vehicles'
-          },
-          {
-            id: 29,
-            name: 'Entertainment: Comics'
-          },
-          {
-            id: 30,
-            name: 'Science: Gadgets'
-          },
-          {
-            id: 31,
-            name: 'Entertainment: Japanese Anime & Manga'
-          },
-          {
-            id: 32,
-            name: 'Entertainment: Cartoon & Animations'
-          }
-        ]
-      }
-    },
-
-    components: {
-      Button
+export default {
+  data () {
+    return {
+      categoryList: null,
+      chosenCategory: null,
+      questionNumber: 1
     }
+  },
+  mounted () {
+    axios
+      .get('https://opentdb.com/api_category.php')
+      .then(response => (this.categoryList = response.data.trivia_categories))
+  },
+  components: {
+    Link
   }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -155,6 +65,8 @@
   label {
     display: block;
     margin: 30px auto 10px auto;
+    font-size: 1.3em;
+    font-weight: bold;
   }
 
   select {

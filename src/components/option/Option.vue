@@ -7,11 +7,11 @@
 </template>
 
 <script>
-  export default {
-    props: {
-      options: Object
-    }
+export default {
+  props: {
+    options: Object
   }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

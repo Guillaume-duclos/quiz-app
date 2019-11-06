@@ -3,16 +3,16 @@
 </template>
 
 <script>
-  export default {
-    props: {
-      text: String
-    },
-    methods: {
-      handleClick () {
-        this.$emit('click')
-      }
+export default {
+  props: {
+    text: String
+  },
+  methods: {
+    handleClick () {
+      this.$emit('click')
     }
   }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -32,5 +32,6 @@
     font-weight: bold;
     cursor: pointer;
     outline: none;
+    line-height: 1;
   }
 </style>

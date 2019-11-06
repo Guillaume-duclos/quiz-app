@@ -20,7 +20,7 @@ export default new Router({
       component: Quiz
     },
     {
-      path: '/results',
+      path: '/results/:score(\\d+)/:nbQuestion(\\d+)',
       name: 'Results',
       component: Results
     },

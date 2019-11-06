@@ -1,14 +1,19 @@
 <template>
-  <router-link :to=link class="link" text="Valider">{{ text }}</router-link>
+  <div>
+    <router-link :to="{name: 'Quiz', params: {category, nbQuestion}}" class="link" text="Valider">{{ text }}</router-link>
+  </div>
+
 </template>
 
 <script>
-  export default {
-    props: {
-      link: String,
-      text: String
-    }
+export default {
+  props: {
+    path: String,
+    category: Number,
+    nbQuestion: Number,
+    text: String
   }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -28,5 +33,6 @@
     font-weight: bold;
     cursor: pointer;
     outline: none;
+    line-height: 1;
   }
 </style>
