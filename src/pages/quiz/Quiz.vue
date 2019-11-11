@@ -1,31 +1,43 @@
 <template>
   <fragment>
-    <div v-if="!isLoading && noError">
-      <h1 class="title">Question {{ questionIndex + 1 }}/{{ $route.params.nbQuestion }}</h1>
+    <Header
+      :title="`Question ${questionIndex + 1 }/${ $route.params.nbQuestion }`"
+      subTitle="1 seule réponse est valide pour chaque question."
+    />
+    <!--<main v-if="!isLoading && noError">
       <h2>{{ questions[questionIndex].question }}</h2>
       <div v-if="!showNextButton" class="response-container" ref="responseContainer">
-        <div class="response" v-for="response in questions[questionIndex].incorrect_answers" v-bind:key="response">
-          <input type="radio" v-bind:id=response name="response" v-bind:value=response>
-          <label v-bind:for=response @click=invalidResult>{{ response }}</label>
+        <div class="response" v-for="response in questions[questionIndex].incorrect_answers" :key="response">
+          <input type="radio" :id=response name="response" :value=response>
+          <label :for=response @click=invalidResult>{{ response }}</label>
         </div>
         <div class="response">
-          <input type="radio" v-bind:id=this.questions[questionIndex].correct_answer name="response" v-bind:value=this.questions[questionIndex].correct_answer>
-          <label v-bind:for=this.questions[questionIndex].correct_answer @click=validResult>{{ this.questions[questionIndex].correct_answer }}</label>
+          <input type="radio" :id=this.questions[questionIndex].correct_answer name="response" :value=this.questions[questionIndex].correct_answer>
+          <label :for=this.questions[questionIndex].correct_answer @click=validResult>{{ this.questions[questionIndex].correct_answer }}</label>
         </div>
       </div>
       <p v-if="result && showNextButton" class="feedback good-answer">Bonne réponse !</p>
       <p v-if="!result && showNextButton" class="feedback bad-answer">Mauvaise réponse</p>
+    </main>-->
+    <Card
+      :question="questions[questionIndex].question"
+      :incorrectAnswers="questions[questionIndex].incorrect_answers"
+      :correctAnswer="questions[questionIndex].correct_answer"
+      v-on:update="validResult"
+    />
+    <footer>
       <Button class="button" v-if="questionIndex + 1 <= $route.params.nbQuestion && !showNextButton" text="Valider" @click="submitResponse"></Button>
       <Button class="button" v-if="questionIndex + 1 != $route.params.nbQuestion && showNextButton" text="Suivant" @click="nextQuestion"></Button>
       <router-link v-if="questionIndex + 1 == $route.params.nbQuestion && showNextButton" :to="{name: 'Results', params: {score, nbQuestion: $route.params.nbQuestion}}" class="button">Voir le score</router-link>
-    </div>
-    <p v-if="!noError">{{ errorMessage }}</p>
+    </footer>
   </fragment>
 </template>
 
 <script>
 import axios from 'axios'
-import Button from '../button/Button'
+import Header from '../../components/header/Header'
+import Card from '../../components/card/Card'
+import Button from '../../components/button/Button'
 
 export default {
   data () {
@@ -37,7 +49,8 @@ export default {
       errorMessage: null,
       result: false,
       score: 0,
-      showNextButton: false
+      showNextButton: false,
+      responses: []
     }
   },
   mounted () {
@@ -53,22 +66,17 @@ export default {
       })
       .finally(() => { this.isLoading = false })
   },
-  // On mélange l'ordre des réponses afin que la bonne réponse ne soit pas tout le temps en dernière position
-  updated () {
-    if (!this.showNextButton) {
-      for (let i = this.$refs.responseContainer.children.length; i >= 0; i--) {
-        this.$refs.responseContainer.appendChild(this.$refs.responseContainer.children[Math.random() * i | 0])
-      }
-    }
-  },
   methods: {
-    // On invalide le résultat si l'utilisateur cliqué sur une mauvaise réponse
+    /*  // On invalide le résultat si l'utilisateur cliqué sur une mauvaise réponse
     invalidResult () {
       this.result = false
     },
     // On valide le résultat si l'utilisateur cliqué sur la bonne réponse
     validResult () {
       this.result = true
+    },  */
+    validResult () {
+      console.log('OK')
     },
     // Gestion du boutton "Valider"
     submitResponse () {
@@ -85,11 +93,13 @@ export default {
     }
   },
   components: {
+    Header,
+    Card,
     Button
   }
 }
 </script>
 
 <style scoped lang="scss">
-  @import "index.scss";
+  @import "index";
 </style>

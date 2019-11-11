@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '../components/home/Home'
-import Quiz from '../components/quiz/Quiz'
-import Results from '../components/results/Results'
+import Home from '../pages/home/Home'
+import Quiz from '../pages/quiz/Quiz'
+import Results from '../pages/results/Results'
 
 Vue.use(Router)
 

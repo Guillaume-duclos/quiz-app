@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  background-color: $background;
+}
+
+body {
+  display: flex;
+  background-image: url("./assets/ic_question.svg");
+  background-size: 80px;
+}
+
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: $white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: auto;
+  height: 100%;
+  padding: 70px 30px;
+}

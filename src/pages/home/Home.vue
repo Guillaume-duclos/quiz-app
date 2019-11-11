@@ -1,14 +1,16 @@
 <template>
-  <fragment>
-    <div v-if="!isLoading && noError" id="home">
-      <h1>Quiz</h1>
-      <h2>Choisissez une témathique et un niveau de difficulté avant de commencer.</h2>
+  <fragment v-if="!isLoading && noError">
+    <Header
+      title="Quiz"
+      subTitle="Choisissez une témathique et un niveau de difficulté avant de commencer."
+    />
+    <main>
       <div class="setup">
         <div>
           <label>Choisissez la catégorie :</label>
           <select v-model="chosenCategory">
             <option key="Any category" value="0">ANY CATEGORY</option>
-            <option v-for="category in categoryList" v-bind:key="category.name" v-bind:value="category.id">
+            <option v-for="category in categoryList" :key="category.name" :value="category.id">
               {{ category.name }}
             </option>
           </select>
@@ -22,16 +24,26 @@
           </select>
         </div>
       </div>
-      <router-link :to="{name: 'Quiz', params: {category: chosenCategory, nbQuestion}}" class="button">Valider</router-link>
-    </div>
-    <p v-if="!noError">{{ errorMessage }}</p>
+    </main>
+    <Button
+      text="Valider"
+      :link="true"
+      routeName="Quiz"
+      :params="{category: chosenCategory, nbQuestion: nbQuestion}"
+    />
   </fragment>
 </template>
 
 <script>
 import axios from 'axios'
+import Header from '../../components/header/Header'
+import Button from '../../components/button/Button'
 
 export default {
+  components: {
+    Button,
+    Header
+  },
   data () {
     return {
       categoryList: null,
@@ -57,5 +69,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  @import "index.scss";
+  @import "index";
 </style>

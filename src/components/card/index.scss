@@ -1,0 +1,61 @@
+@import "../../scss/colors";
+
+.card {
+  background-color: $white;
+  padding: 80px 15px 80px 60px;
+  border-radius: 20px;
+  max-width: 350px;
+  margin: auto;
+  box-shadow: 0 0 15px 3px rgba(0, 0, 0, .2);
+
+  h3 {
+    color: $text;
+    font-size: 2em;
+    line-height: 1.2;
+    position: relative;
+    text-align: left;
+
+    &::before {
+      content: url("../../assets/ic_quote.svg");
+      font-size: 2em;
+      color: $primary;
+      width: 35px;
+      position: absolute;
+      left: -45px;
+      top: -35px;
+    }
+  }
+
+  ul {
+    padding: 0;
+    margin-top: 30px;
+
+    li {
+      list-style-type: none;
+      color: $background;
+      text-align: left;
+      font-size: 1.5em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: .2s;
+      margin: 5px 0;
+      padding: 5px 0;
+      border-radius: 10px;
+
+      &:hover {
+        background-color: $primary;
+        padding-left: 20px;
+        padding-right: 20px;
+        transition: .2s;
+        color: $white;
+      }
+    }
+
+    .currentResponse {
+      background-color: $primary;
+      padding: 5px 20px;
+      transition: .2s;
+      color: $white;
+    }
+  }
+}

@@ -1,11 +1,17 @@
 <template>
-  <button @click="handleClick">{{ text }}</button>
+  <fragment>
+    <button v-if="!link" @click="handleClick">{{ text }}</button>
+    <router-link v-if="link" :to="{name: routeName, params: params}" class="button">{{ text }}</router-link>
+  </fragment>
 </template>
 
 <script>
 export default {
   props: {
-    text: String
+    text: String,
+    link: Boolean,
+    routeName: String,
+    params: Object
   },
   methods: {
     handleClick () {
@@ -14,3 +20,7 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  @import "index";
+</style>
