@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Fragment from 'vue-fragment'
+import store from './store/Store'
 
 Vue.config.productionTip = false
 Vue.use(Fragment.Plugin)
@@ -12,6 +13,7 @@ Vue.use(Fragment.Plugin)
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

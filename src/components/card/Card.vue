@@ -10,6 +10,8 @@
 </template>
 
 <script>
+import store from '../../store/Store'
+
 export default {
   props: {
     question: String,
@@ -24,6 +26,9 @@ export default {
     }
   },
   mounted () {
+    this.createAnswersList()
+  },
+  updated () {
     this.createAnswersList()
   },
   methods: {
@@ -47,7 +52,7 @@ export default {
     },
     // On valide ou non le résultat si l'utilisateur clique sur une réponse
     validResponse (answer) {
-      answer === this.correctAnswer ? this.isValid = true : this.isValid = false
+      answer === this.correctAnswer ? store.commit('validResponse') : store.commit('invalidResponse')
       this.currentResponse = answer
     }
   }

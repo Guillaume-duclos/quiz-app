@@ -23,7 +23,6 @@
       :question="questions[questionIndex].question"
       :incorrectAnswers="questions[questionIndex].incorrect_answers"
       :correctAnswer="questions[questionIndex].correct_answer"
-      v-on:update="validResult"
     />
     <footer>
       <Button class="button" v-if="questionIndex + 1 <= $route.params.nbQuestion && !showNextButton" text="Valider" @click="submitResponse"></Button>
@@ -38,8 +37,11 @@ import axios from 'axios'
 import Header from '../../components/header/Header'
 import Card from '../../components/card/Card'
 import Button from '../../components/button/Button'
+import Store from '../../store/Store'
+import Vuex from 'vuex'
 
 export default {
+  store: Store,
   data () {
     return {
       questions: null,
@@ -50,7 +52,8 @@ export default {
       result: false,
       score: 0,
       showNextButton: false,
-      responses: []
+      responses: [],
+      responseIsValid: Boolean
     }
   },
   mounted () {
@@ -66,26 +69,19 @@ export default {
       })
       .finally(() => { this.isLoading = false })
   },
+  computed: {
+    ...Vuex.mapGetters([
+      'isValid'
+    ])
+  },
   methods: {
-    /*  // On invalide le résultat si l'utilisateur cliqué sur une mauvaise réponse
-    invalidResult () {
-      this.result = false
-    },
-    // On valide le résultat si l'utilisateur cliqué sur la bonne réponse
-    validResult () {
-      this.result = true
-    },  */
-    validResult () {
-      console.log('OK')
-    },
-    // Gestion du boutton "Valider"
+    // Gestion du boutton "Suivant"
     submitResponse () {
-      if (this.result) {
-        this.score++
+      if (this.isValid) {
+        Store.commit('incrementScore')
       }
       this.showNextButton = true
     },
-    // Gestion du boutton "Suivant"
     nextQuestion () {
       this.result = false
       this.questionIndex++
